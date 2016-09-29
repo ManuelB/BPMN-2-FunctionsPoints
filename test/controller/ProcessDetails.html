@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Unit tests for BPMN-2-FPA Process Details Controller</title>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta charset="UTF-8">
+    <script id="sap-ui-bootstrap" src="https://openui5.hana.ondemand.com/1.40.8/resources/sap-ui-core.js" data-sap-ui-resourceroots='{
+            "bpmn2fpa" : "../../bpmn2fpa"
+        }' data-sap-ui-xx-bindingSyntax='complex' data-sap-ui-frameOptions='deny' data-sap-ui-theme='sap_belize'>
+    </script>
+    <script>
+        // Arrange
+        var oModelData,
+            oView,
+            oProcessDetailsController;
+        // Act
+        oView = sap.ui.xmlview("bpmn2fpa.view.ProcessDetails");
+
+        var oApp = new sap.m.App("myApp");
+        oApp.addPage(oView);
+        oApp.placeAt("body");
+
+        oProcessDetailsController = oView.getController();
+
+        oProcessDetailsController.onInit();
+
+        oProcessDetailsController.analyzeProcessDocumentFromUrl("../../test-data/Manage todos.bpmn", function() {
+            alert(oProcessDetailsController.bpmnToMarkdown(oProcessDetailsController._oProcessModel));
+        });
+    </script>
+</head>
+
+<body id="body">
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+ {
+     "_version": "1.1.0",
+     "sap.app": {
+         "_version": "1.1.0",
+         "id": "bpmn2fpa",
+         "type": "application",
+         "title": "{{appTitle}}",
+         "description": "{{appDescription}}",
+         "applicationVersion": {
+             "version": "1.0.0"
+         }
+     },
+     "sap.ui": {
+         "_version": "1.1.0",
+         "technology": "UI5",
+         "deviceTypes": {
+             "desktop": true,
+             "tablet": true,
+             "phone": true
+         },
+         "supportedThemes": [
+             "sap_bluecrystal"
+         ]
+     },
+     "sap.ui5": {
+         "_version": "1.1.0",
+         "rootView": "bpmn2fpa.view.App",
+         "dependencies": {
+             "minUI5Version": "1.38",
+             "libs": {
+                 "sap.m": {
+
+                 }
+             }
+         },
+         "models": {
+             "i18n": {
+                 "type": "sap.ui.model.resource.ResourceModel",
+                 "settings": {
+                     "bundleName": "bpmn2fpa.i18n.i18n"
+                 }
+             }
+         },
+         "routing": {
+             "config": {
+                 "routerClass": "sap.m.routing.Router",
+                 "viewType": "XML",
+                 "viewPath": "bpmn2fpa.view",
+                 "controlId": "splitApp",
+                 "controlAggregation": "detailPages",
+                 "clearTarget": false,
+                 "transition": "slide",
+                 "bypassed": {
+                     "target": "notFound"
+                 }
+             },
+             "routes": [{
+                     "pattern": "",
+                     "name": "Home",
+                     "target": ["processList", "homeDetails"]
+                 },
+                 {
+                     "pattern": "Process(':fileName:')",
+                     "name": "Process",
+                     "target": ["processList", "processDetails"]
+                 }
+             ],
+             "targets": {
+                 "homeDetails": {
+                     "viewName": "HomeDetails",
+                     "controlId": "splitApp",
+                     "controlAggregation": "detailPages"
+                 },
+                 "processList": {
+                     "viewName": "ProcessList",
+                     "controlId": "splitApp",
+                     "controlAggregation": "masterPages",
+                     "clearControlAggregation": true
+                 },
+                 "processDetails": {
+                     "viewName": "ProcessDetails",
+                     "controlId": "splitApp",
+                     "controlAggregation": "detailPages",
+                     "clearControlAggregation": true
+                 },
+                 "notFound": {
+                     "viewName": "NotFound",
+                     "transition": "show"
+                 }
+             }
+         }
+     }
+ }

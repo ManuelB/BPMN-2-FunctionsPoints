@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Unit tests for BPMN-2-FPA Frontend</title>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta charset="UTF-8">
+
+    <script id="sap-ui-bootstrap" src="https://openui5.hana.ondemand.com/1.40.8/resources/sap-ui-core.js" data-sap-ui-resourceroots='{
+            "bpmn2fpa" : "../bpmn2fpa",
+            "test" : "./"
+        }' data-sap-ui-xx-bindingSyntax='complex' data-sap-ui-frameOptions='deny'>
+    </script>
+
+    <script>
+        jQuery.sap.require("sap.ui.qunit.qunit-css");
+        jQuery.sap.require("sap.ui.thirdparty.qunit");
+        jQuery.sap.require("sap.ui.qunit.qunit-junit");
+        jQuery.sap.require("sap.ui.qunit.qunit-coverage");
+
+        sap.ui.define(["test/controller/ProcessDetails"], function() {});
+    </script>
+</head>
+
+<body>
+    <div id="content"></div>
+    <h1 id="qunit-header">Unit tests for BPMN-2-FPA</h1>
+    <h2 id="qunit-banner"></h2>
+    <h2 id="qunit-userAgent"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture"></div>
+</body>
+
+</html>

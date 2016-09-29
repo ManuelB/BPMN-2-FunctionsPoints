@@ -1,0 +1,22 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		noDataText="No JIRA issues found"
+		title="Select an issue"
+		search="onJiraIssueSearch"
+		confirm="onJiraIssueConfirm"
+		cancel="onJiraIssueClose"
+		growingThreshold="20"
+		items="{
+			path: '/issues'
+		}" >
+		<StandardListItem
+			title="{fields/summary}"
+			description="{key} {fields/issuetype/name}"
+			icon="{ProductPicUrl}"
+			iconDensityAware="false"
+			iconInset="false"
+			type="Active" />
+	</SelectDialog>
+</core:FragmentDefinition>

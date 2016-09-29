@@ -1,0 +1,70 @@
+<mvc:View 
+  xmlns="sap.m" 
+  xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" controllerName="bpmn2fpa.controller.ProcessDetails">
+  <Page title="Process" showNavButton="true" navButtonPress="onNavButtonPress">
+    <ObjectHeader title="{fileName}"/>
+    <Table items="{Process>/userTasks}">
+      <columns>
+        <Column>
+          <Text text="Name" />
+        </Column>
+        <Column>
+          <Text text="Amount of Inputs" />
+        </Column>
+        <Column>
+          <Text text="Amount of Outputs" />
+        </Column>
+        <Column>
+          <Text text="Complexity" />
+        </Column>
+      </columns>
+      <ColumnListItem>
+        <cells>
+          <Text text="{Process>@name}"/>
+          <Text text="{Process>amountOfInputs}" />
+          <Text text="{Process>amountOfOutputs}" />
+          <Select selectedKey="{Process>complexity}">
+            <core:Item key="Low" text="Low" />
+            <core:Item key="Average" text="Average" />
+            <core:Item key="High" text="High" />
+          </Select>
+        </cells>
+      </ColumnListItem>
+    </Table>
+    <ObjectHeader title="{fileName}"/>
+    <Table items="{Process>/dataStores}">
+      <columns>
+        <Column>
+          <Text text="Name" />
+        </Column>
+        <Column>
+          <Text text="Capacity" />
+        </Column>
+        <Column>
+          <Text text="Complexity" />
+        </Column>
+      </columns>
+      <ColumnListItem>
+        <cells>
+          <Text text="{Process>@name}"/>
+          <Text text="{Process>@capacity}"/>
+          <Select selectedKey="{Process>complexity}">
+            <core:Item key="Low" text="Low" />
+            <core:Item key="Average" text="Average" />
+            <core:Item key="High" text="High" />
+          </Select>
+        </cells>
+      </ColumnListItem>
+    </Table>
+    <Panel>
+      <Title id="functionPointSum" textAlign="End" width="100%" text="{path : 'Process>/', formatter: '.formatFunctionPointsForProcessModel'}"></Title>
+    </Panel>
+    <footer>
+      <Toolbar>
+        <Button text="Configure JIRA connection" press="onJiraConfigurationShow" />
+        <ToolbarSpacer/>
+        <Button text="Send estimate to JIRA" type="Accept" press="onPressSendToJira" />
+      </Toolbar>
+    </footer>
+  </Page>
+</mvc:View>
