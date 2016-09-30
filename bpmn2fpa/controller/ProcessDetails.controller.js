@@ -367,21 +367,21 @@ sap.ui.define([
         bpmnToMarkdown: function(oProcessModel) {
             var me = this;
             var functionPoints = 0;
-            var markDownString = "|| Element || Complexity || Function Points ||\n";
+            var markDownString = "|| Name || Element || Complexity || Function Points ||\n";
 
             var rootOfProcessModel = oProcessModel.getData();
             rootOfProcessModel.dataStores.forEach(function(dataStore) {
                 var points = me.calculateFunctionPointsForDataStore(dataStore);
-                markDownString += "| Internal Logical File | " + dataStore.complexity + " | " + points + " |\n";
+                markDownString += "| " + dataStore["@name"] + " | Internal Logical File | " + dataStore.complexity + " | " + points + " |\n";
                 functionPoints += points;
             });
             rootOfProcessModel.userTasks.forEach(function(userTask) {
                 var points = me.calculateFunctionPointsForUserTasks(userTask);
-                markDownString += "| " + userTask.functionPointType + " | " + userTask.complexity + " | " + points + " |\n";
+                markDownString += "| " + userTask["@name"] + " | " + userTask.functionPointType + " | " + userTask.complexity + " | " + points + " |\n";
                 functionPoints += points;
             });
 
-            markDownString += "| | *Sum:* | " + functionPoints + "|\n";
+            markDownString += "| | | *Sum:* | " + functionPoints + "|\n";
 
             return markDownString;
         },
