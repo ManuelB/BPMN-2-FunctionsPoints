@@ -69,7 +69,8 @@ sap.ui.define([
     });
 
     QUnit.test("Parse BPMN Model", function(assert) {
-        expect(0);
+        expect(1);
+        var done = assert.async();
         // Arrange
         var oModelData,
             oView,
@@ -80,9 +81,18 @@ sap.ui.define([
 
         oProcessDetailsController.onInit();
 
-        oProcessDetailsController.analyzeProcessDocumentFromUrl("../test-data/Manage todos.bpmn");
+        oProcessDetailsController.analyzeProcessDocumentFromUrl("../test-data/Manage todos.bpmn", function() {
+            var modelString = oProcessDetailsController.bpmnToMarkdown(oProcessDetailsController._oProcessModel);
+            assert.equal("|| Name || Element || Complexity || Function Points ||\n" +
+                "| Todo | Internal Logical File | Low | 7 |\n" +
+                "| Overview todos | EQ | Average | 4 |\n" +
+                "| Create todo | EI | Average | 4 |\n" +
+                "| Update todo | EI | Average | 4 |\n" +
+                "| Delete todo | EI | Average | 4 |\n" +
+                "| | | *Sum:* | 23|\n", modelString);
+            done();
+        });
 
-        oProcessDetailsController.bpmnToMarkdown(oProcessDetailsController._oProcessModel);
     });
 
 });

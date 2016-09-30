@@ -26,7 +26,10 @@ sap.ui.define([
             this._oProcessModel = new JSONModel({ "userTasks": [], "dataStores": [] }, true);
             this._oProcessModel.bindTree("/").attachChange(function() {
                 // When anything changes
-                me.byId("functionPointSum").getBinding("text").refresh(true);
+                var binding = me.byId("functionPointSum").getBinding("text");
+                if (binding) {
+                    binding.refresh(true);
+                }
             });
             this.getView().setModel(this._oProcessModel, "Process");
 
