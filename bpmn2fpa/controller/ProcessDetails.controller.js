@@ -350,7 +350,7 @@ sap.ui.define([
                     "url": jiraConfiguration.baseUrl + "/rest/api/2/issue/" + selectedJiraIssue.key,
                     "data": JSON.stringify({
                         "update": {
-                            "timetracking": [{ "edit": { "originalEstimate": functionPoints + "h" } }],
+                            "timetracking": [{ "edit": { "originalEstimate": (functionPoints*3) + "h" } }],
                             "comment": [{
                                 "add": {
                                     "body": me.bpmnToMarkdown(this._oProcessModel)
