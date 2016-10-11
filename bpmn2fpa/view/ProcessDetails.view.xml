@@ -15,6 +15,9 @@
           <Text text="Amount of Outputs" />
         </Column>
         <Column>
+          <Text text="Function point type" />
+        </Column>
+        <Column>
           <Text text="Complexity" />
         </Column>
       </columns>
@@ -23,6 +26,11 @@
           <Text text="{Process>@name}"/>
           <Text text="{Process>amountOfInputs}" />
           <Text text="{Process>amountOfOutputs}" />
+          <Select selectedKey="{Process>functionPointType}">
+            <core:Item key="EI" text="External Input" />
+            <core:Item key="EO" text="External Output" />
+            <core:Item key="EQ" text="External Query" />
+          </Select>
           <Select selectedKey="{Process>complexity}">
             <core:Item key="Low" text="Low" />
             <core:Item key="Average" text="Average" />

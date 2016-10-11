@@ -88,6 +88,7 @@ sap.ui.define([
          * @param {Document} bpmnDocument
          */
         analyzeProcessDocument: function(bpmnDocument) {
+            var me = this;
             var userTasks = Array.prototype.slice.call(bpmnDocument.querySelectorAll("userTask"));
             userTasks = userTasks.map(function(userTaskNode) {
                 var amountOfInputs = userTaskNode.querySelectorAll("dataInput").length;
@@ -96,7 +97,7 @@ sap.ui.define([
                     "@name": userTaskNode.getAttribute("name"),
                     "amountOfInputs": amountOfInputs,
                     "amountOfOutputs": amountOfOutputs,
-                    "functionPointType": (amountOfInputs > 0 && amountOfOutputs > 0) ? "EO" : (amountOfInputs > 0 ? "EI" : "EQ"),
+                    "functionPointType": me.classifyUserTask(userTaskNode, amoutOfInputs, amoutOfOutputs),
                     "complexity": "Average",
                     "node": userTaskNode
                 };
@@ -112,6 +113,23 @@ sap.ui.define([
                 };
             });
             this._oProcessModel.setProperty("/dataStores", dataStores);
+
+        },
+        /**
+         * Classifies a user task into EI, EO, and EQ based on some characteristics
+         * of the task. 
+         */
+        classifyUserTask: function(userTaskNode, amoutOfInputs, amoutOfOutputs) {
+            var name = userTaskNode.getAttribute("name");
+            if (name.match(/Eingabe/)) {
+                return "EI";
+            } else if (name.match(/speichern/)) {
+                return "EO";
+            } else if (name.match(/Auswertung/)) {
+                return "EO";
+            } else {
+                return (amountOfInputs > 0 && amountOfOutputs > 0) ? "EO" : (amountOfInputs > 0 ? "EI" : "EQ");
+            }
 
         },
         /**
@@ -350,7 +368,7 @@ sap.ui.define([
                     "url": jiraConfiguration.baseUrl + "/rest/api/2/issue/" + selectedJiraIssue.key,
                     "data": JSON.stringify({
                         "update": {
-                            "timetracking": [{ "edit": { "originalEstimate": (functionPoints*3) + "h" } }],
+                            "timetracking": [{ "edit": { "originalEstimate": (functionPoints * 3) + "h" } }],
                             "comment": [{
                                 "add": {
                                     "body": me.bpmnToMarkdown(this._oProcessModel)
