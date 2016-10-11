@@ -127,7 +127,7 @@ sap.ui.define([
                 return "EO";
             } else if (name.match(/Auswertung/)) {
                 return "EO";
-            } else if (name.match(/anzeigen/)) {
+            } else if (name.match(/anzeigen/) || name.match(/prüfen/)) {
                 return "EQ";
             } else {
                 return (amountOfInputs > 0 && amountOfOutputs > 0) ? "EO" : (amountOfInputs > 0 ? "EI" : "EQ");
