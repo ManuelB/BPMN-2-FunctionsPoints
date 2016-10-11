@@ -97,7 +97,7 @@ sap.ui.define([
                     "@name": userTaskNode.getAttribute("name"),
                     "amountOfInputs": amountOfInputs,
                     "amountOfOutputs": amountOfOutputs,
-                    "functionPointType": me.classifyUserTask(userTaskNode, amoutOfInputs, amoutOfOutputs),
+                    "functionPointType": me.classifyUserTask(userTaskNode, amountOfInputs, amountOfOutputs),
                     "complexity": "Average",
                     "node": userTaskNode
                 };
@@ -119,7 +119,7 @@ sap.ui.define([
          * Classifies a user task into EI, EO, and EQ based on some characteristics
          * of the task. 
          */
-        classifyUserTask: function(userTaskNode, amoutOfInputs, amoutOfOutputs) {
+        classifyUserTask: function(userTaskNode, amountOfInputs, amountOfOutputs) {
             var name = userTaskNode.getAttribute("name");
             if (name.match(/Eingabe/)) {
                 return "EI";
