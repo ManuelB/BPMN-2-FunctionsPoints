@@ -122,10 +122,8 @@ sap.ui.define([
          */
         classifyUserTask: function(userTaskNode, amountOfInputs, amountOfOutputs) {
             var name = userTaskNode.getAttribute("name");
-            if (name.match(/Eingabe/) || name.match(/eingeben/) || name.match(/anlegen/) || name.match(/löschen/)) {
+            if (name.match(/Eingabe/) || name.match(/eingeben/) || name.match(/anlegen/) || name.match(/löschen/) || name.match(/speichern/) || name.match(/bearbeiten/)) {
                 return "EI";
-            } else if (name.match(/speichern/)) {
-                return "EO";
             } else if (name.match(/Auswertung/)) {
                 return "EO";
             } else if (name.match(/anzeigen/) || name.match(/prüfen/)) {
