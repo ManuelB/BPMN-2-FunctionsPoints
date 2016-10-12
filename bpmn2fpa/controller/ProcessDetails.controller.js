@@ -93,12 +93,13 @@ sap.ui.define([
             userTasks = userTasks.map(function(userTaskNode) {
                 var amountOfInputs = userTaskNode.querySelectorAll("dataInput").length;
                 var amountOfOutputs = userTaskNode.querySelectorAll("dataOutput").length;
+                var name = userTaskNode.getAttribute("name");
                 return {
-                    "@name": userTaskNode.getAttribute("name"),
+                    "@name": name,
                     "amountOfInputs": amountOfInputs,
                     "amountOfOutputs": amountOfOutputs,
                     "functionPointType": me.classifyUserTask(userTaskNode, amountOfInputs, amountOfOutputs),
-                    "complexity": "Average",
+                    "complexity": name.match(/löschen/) ? "Low" : "Average",
                     "node": userTaskNode
                 };
             });
@@ -121,7 +122,7 @@ sap.ui.define([
          */
         classifyUserTask: function(userTaskNode, amountOfInputs, amountOfOutputs) {
             var name = userTaskNode.getAttribute("name");
-            if (name.match(/Eingabe/) || name.match(/eingeben/) || name.match(/anlegen/)) {
+            if (name.match(/Eingabe/) || name.match(/eingeben/) || name.match(/anlegen/) || name.match(/löschen/)) {
                 return "EI";
             } else if (name.match(/speichern/)) {
                 return "EO";
