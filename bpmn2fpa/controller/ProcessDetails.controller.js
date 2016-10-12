@@ -121,7 +121,7 @@ sap.ui.define([
          */
         classifyUserTask: function(userTaskNode, amountOfInputs, amountOfOutputs) {
             var name = userTaskNode.getAttribute("name");
-            if (name.match(/Eingabe/)) {
+            if (name.match(/Eingabe/) || name.match(/eingeben/) || name.match(/anlegen/)) {
                 return "EI";
             } else if (name.match(/speichern/)) {
                 return "EO";
